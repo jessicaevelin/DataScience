@@ -75,3 +75,76 @@ print( df_selecionado )
 3     25     RJ   Itapira
 4     36     RJ  Curitiba
 """
+df_bruto = pd.read_csv("./dados/train.csv")
+df = df_bruto.copy()
+
+# Sempre fazer um backup
+df = df.copy()
+
+## Dimensões: Linhas e colunas
+print(df.shape)
+""" 
+(4467, 20)
+ """
+
+## Primeiras e últimas linhas
+print(df.head(1))
+print(df.tail(2))
+""" 
+ID Delivery_person_ID Delivery_person_Age  ... Festival    City  Time_taken(min)
+0  0x4     INDORES13DEL02                   37  ...      No   Urban          (min) 24 
+[1 rows x 20 columns]
+
+           ID Delivery_person_ID Delivery_person_Age  ... Festival    City  Time_taken(min)
+4465  0x3     INDORES13DEL03                   34  ...      No   Urban          (min) 22
+4466  0xd      KNPRES03DEL03                   33  ...       No     NaN              NaN
+[2 rows x 20 columns] 
+"""
+
+## Tipo de coluna
+print(df.dtypes)
+""" 
+ID                              object
+Delivery_person_ID              object
+Delivery_person_Age             object
+Delivery_person_Ratings         object
+Restaurant_latitude            float64
+Restaurant_longitude           float64
+Delivery_location_latitude     float64
+Delivery_location_longitude    float64
+Order_Date                      object
+Time_Orderd                     object
+Time_Order_picked               object
+Weatherconditions               object
+Road_traffic_density            object
+Vehicle_condition                int64
+Type_of_order                   object
+Type_of_vehicle                 object
+multiple_deliveries             object
+Festival                        object
+City                            object
+Time_taken(min)                 object
+dtype: object
+"""
+
+## Valores únicos
+print(df['Delivery_person_Age'].unique())
+""" 
+['37' '34' '23' '38' '32' '22' '33' '35' '36' '21' '24' '29' '25' '31'
+ '27' '26' '20' 'NaN ' '28' '39' '30' '15' '50'] 
+"""
+
+## Ordenar de acordo com uma coluna
+df.sort_values("Delivery_person_Age", ascending=True)
+
+## Somar todas as linhas
+df['Delivery_person_Age'].sum()
+
+## Média
+df['Delivery_person_Age'].mean()
+
+## Converter o tipo
+df['Delivery_person_Age'].astype(float)
+
+## Converte para datas
+pd.to_datetime(df['Delivery_person_Age'], format="%d-%m-%Y")
